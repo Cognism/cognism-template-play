@@ -1,0 +1,11 @@
+package controllers
+
+import play.api.mvc._
+
+class Application extends Controller {
+
+  def swagger = Action { request =>
+    Ok(views.html.swagger())
+  }
+
+}

@@ -1,0 +1,9 @@
+cognism-template-play
+=====================================
+
+Just clone the repository and do the following:
+	$ cd cognism-template-play
+	$ activator
+	> run
+
+Go to: http://localhost:9000
