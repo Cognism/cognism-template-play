@@ -6,7 +6,7 @@ version := "1.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion  := "2.11.7"
+scalaVersion  := "2.11.8"
 
 resolvers ++= Seq()
 
@@ -26,9 +26,9 @@ libraryDependencies ++= Seq(
   jdbc,
   filters,
   ws,
-  "joda-time"                 %   "joda-time"                   % "2.9.2",
-  "org.mongodb"               %%  "casbah"                      % "3.1.0",
-  "io.swagger"                %%  "swagger-play2"               % "1.5.1"
+  "joda-time"                 %   "joda-time"                   % "2.9.3",
+  "org.mongodb"               %%  "casbah"                      % "3.1.1",
+  "io.swagger"                %%  "swagger-play2"               % "1.5.2"
 )
 
 routesGenerator := InjectedRoutesGenerator

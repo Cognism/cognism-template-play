@@ -13,10 +13,20 @@ import scala.concurrent.Future
 trait Secured {
   this: Controller =>
 
-  val API_TOKEN = "X-API-Token"
+  val HEADER_API_TOKEN = "X-API-Token"
+  val QUERY_API_TOKEN = "token"
+
+  private def tokenValue[T](request:Request[T]):Option[String] = {
+    val headerToken = request.headers.get(HEADER_API_TOKEN)
+    if(headerToken.isEmpty){
+      request.queryString.get(QUERY_API_TOKEN).map(_.mkString(""))
+    }else{
+      headerToken
+    }
+  }
 
   def ApiAction(f: => Request[AnyContent] => Result) = Action{ request =>
-    request.headers.get(API_TOKEN) match {
+    tokenValue(request) match {
       case Some(token) if(ApplicationConfig.Api.tokens.contains(token)) =>
         f(request)
       case _ =>
@@ -25,7 +35,7 @@ trait Secured {
   }
 
   def ApiActionAsync[A](bodyParser:BodyParser[A])(f: => Request[A] => Future[Result]) = Action.async(bodyParser){ request =>
-    request.headers.get(API_TOKEN) match {
+    tokenValue(request) match {
       case Some(token) if(ApplicationConfig.Api.tokens.contains(token)) =>
         f(request)
       case _ =>
@@ -34,7 +44,7 @@ trait Secured {
   }
 
   def ApiAction[A](bodyParser:BodyParser[A])(f: => Request[A] => Result) = Action(bodyParser){ request =>
-    request.headers.get(API_TOKEN) match {
+    tokenValue(request) match {
       case Some(token) if(ApplicationConfig.Api.tokens.contains(token)) =>
         f(request)
       case _ =>
