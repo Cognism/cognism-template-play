@@ -26,7 +26,7 @@ libraryDependencies ++= Seq(
   jdbc,
   filters,
   ws,
-  "joda-time"                 %   "joda-time"                   % "2.9.3",
+  "joda-time"                 %   "joda-time"                   % "2.9.4",
   "org.mongodb"               %%  "casbah"                      % "3.1.1",
   "io.swagger"                %%  "swagger-play2"               % "1.5.2"
 )

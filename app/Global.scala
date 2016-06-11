@@ -1,12 +1,13 @@
 import play.api._
-
 import play.api.mvc._
 import play.api.mvc.RequestHeader
 import play.filters.cors.CORSFilter
 import play.filters.gzip.GzipFilter
-import utils.{ApplicationException, ApplicationConfig}
+import utils.{ApplicationConfig, ApplicationException}
+
 import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.filters.headers.SecurityHeadersFilter
 
 object Global extends GlobalSettings {
 
@@ -31,6 +32,7 @@ object Global extends GlobalSettings {
     Filters(
       LoggingFilter(action),
       CORSFilter(),
+      SecurityHeadersFilter(Configuration(ApplicationConfig.config)),
       new GzipFilter(shouldGzip = (request, response) => request.headers.get("Accept").exists(_.contains("gzip")) || request.headers.get("Accept-Encoding").exists(_.contains("gzip")) )
     )
   }
