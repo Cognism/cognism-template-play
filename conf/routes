@@ -3,6 +3,7 @@
 # ~~~~
 
 GET     /                                   controllers.Application.swagger
+GET     /status                             controllers.Application.status
 
 # Example routes
 POST    /api/v1/example                     controllers.v1.ExampleController.noop
