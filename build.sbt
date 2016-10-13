@@ -27,8 +27,7 @@ libraryDependencies ++= Seq(
   cache,
   filters,
   ws,
-  "joda-time"                 %   "joda-time"                   % "2.9.4",
-  "org.webjars"               %   "swagger-ui"                  % "2.2.5"
+  "joda-time"                 %   "joda-time"                   % "2.9.4"
 )
 
 routesGenerator := InjectedRoutesGenerator
