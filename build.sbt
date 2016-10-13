@@ -4,9 +4,11 @@ organization  := "com.cognism"
 
 version := "2.0"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, SwaggerPlugin)
 
 scalaVersion  := "2.11.8"
+
+swaggerDomainNameSpaces := Seq("models")
 
 resolvers ++= Seq()
 
@@ -25,7 +27,8 @@ libraryDependencies ++= Seq(
   cache,
   filters,
   ws,
-  "joda-time"                 %   "joda-time"                   % "2.9.4"
+  "joda-time"                 %   "joda-time"                   % "2.9.4",
+  "org.webjars"               %   "swagger-ui"                  % "2.2.5"
 )
 
 routesGenerator := InjectedRoutesGenerator
