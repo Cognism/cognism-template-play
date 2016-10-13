@@ -65,16 +65,4 @@ object Helper {
     }
   }
 
-
-  def cached[A:ClassTag](key:String, expiration:Int)(block: => A) = {
-    Cache.getAs[A](key) match {
-      case Some(result) =>
-        result
-      case _ =>
-        val result = block
-        Cache.set(key, result, expiration seconds)
-        result
-    }
-  }
-
 }
