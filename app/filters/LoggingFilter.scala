@@ -1,3 +1,5 @@
+package filters
+
 import javax.inject.Inject
 
 import akka.stream.Materializer
@@ -8,8 +10,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class LoggingFilter @Inject() (implicit val mat: Materializer, ec: ExecutionContext) extends Filter {
 
-  def apply(nextFilter: RequestHeader => Future[Result])
-           (requestHeader: RequestHeader): Future[Result] = {
+  def apply(nextFilter: RequestHeader => Future[Result])(requestHeader: RequestHeader): Future[Result] = {
 
     val startTime = System.currentTimeMillis
 

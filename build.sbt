@@ -23,6 +23,7 @@ scalacOptions ++= Seq(
 
 libraryDependencies ++= Seq(
   cache,
+  filters,
   ws,
   "joda-time"                 %   "joda-time"                   % "2.9.4"
 )
