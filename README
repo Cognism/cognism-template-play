@@ -1,9 +1,12 @@
 cognism-template-play
 =====================================
 
+How to run the app?
+-----
+
 Just clone the repository and do the following:
 	$ cd cognism-template-play
-	$ activator
+	$ sbt
 	> run
 
 Go to: http://localhost:9000
