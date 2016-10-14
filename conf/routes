@@ -3,7 +3,8 @@
 # ~~~~
 
 ###
-#  summary: Application Status
+# tags: [Application API]
+# summary: Application Status
 ###
 GET     /status                             controllers.Application.status
 

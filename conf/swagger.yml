@@ -4,6 +4,9 @@
     title: "Cognism API"
     description: "Cognify your enemy!"
     version: "1.0.0"
+    license:
+      name: "Copyright (c) 2016 Cognism All Rights Reserved"
+      url: "http://www.cognism.com"
   consumes:
     - application/json
   produces:
