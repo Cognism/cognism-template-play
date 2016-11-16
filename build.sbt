@@ -6,6 +6,8 @@ version := "2.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala, SwaggerPlugin)
 
+packageName in Universal := "cognism-template-play"
+
 scalaVersion  := "2.11.8"
 
 swaggerDomainNameSpaces := Seq("models")
