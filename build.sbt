@@ -1,35 +1,25 @@
 name := "cognism-template-play"
 
-organization  := "com.cognism"
+version := "3.0.0"
 
-version := "2.0"
+lazy val common = (project in file("modules/common"))
+  .enablePlugins(PlayScala)
+  .settings(Common.settings: _*)
+  .settings(libraryDependencies ++= Common.Dependencies.commonDeps)
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala, SwaggerPlugin)
+lazy val root = (project in file("."))
+  .enablePlugins(PlayScala, SwaggerPlugin)
+  .aggregate(common)
+  .dependsOn(common)
+  .settings(Common.settings: _*)
+  .settings(libraryDependencies ++= Common.Dependencies.rootDeps)
+  .settings(aggregate in Docker := false)
 
-packageName in Universal := "cognism-template-play"
-
-scalaVersion  := "2.11.8"
-
-swaggerDomainNameSpaces := Seq("models")
-
-resolvers ++= Seq()
-
-scalacOptions ++= Seq(
-  //Emit warning for usages of deprecated APIs
-  "-deprecation",
-  //Emit warning for usages of features that should be imported explicitly
-  "-feature",
-  //Enable additional warnings where generated code depends on assumptions
-  "-unchecked",
-  //Warn when dead code is identified
-  "-Ywarn-dead-code"
-)
-
-libraryDependencies ++= Seq(
-  cache,
-  filters,
-  ws,
-  "joda-time"                 %   "joda-time"                   % "2.9.4"
-)
+swaggerDomainNameSpaces := Seq("com.cognism.models")
 
 routesGenerator := InjectedRoutesGenerator
+
+// Docker settings
+maintainer in Docker := "ops@cognism.com"
+
+packageName in Docker := "cognism/todo"

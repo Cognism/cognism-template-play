@@ -1,4 +1,4 @@
-package utils
+package com.cognism.common.utils
 
 import play.api.mvc.{Result, Results}
 

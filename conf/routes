@@ -3,15 +3,28 @@
 # ~~~~
 
 ###
-# tags: [Application API]
-# summary: Application Status
+#  tags: [Template API]
+#  summary: Plain Echo
+#  parameters:
+#    - name: message
+#      description: Input message
+#      in: query
+#      required: true
+#  responses:
+#    200:
+#      description: Message echoed
+#    401:
+#      description: Unauthorized
 ###
-GET     /status                             controllers.Application.status
+GET     /api/echo                        com.cognism.controllers.Application.echo(message:String)
 
 ##########################################################################################################
 
 ### NoDocs ###
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /api/swagger/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 ### NoDocs ###
-GET     /swagger                    controllers.Assets.at(path:String="/public/swagger", file:String="index.html")
+GET     /api/swagger                     controllers.Assets.at(path:String="/public/swagger", file:String="index.html")
+
+### NoDocs ###
+GET     /api/status                      com.cognism.controllers.Application.status

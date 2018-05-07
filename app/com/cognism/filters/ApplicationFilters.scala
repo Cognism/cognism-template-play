@@ -1,4 +1,4 @@
-package filters
+package com.cognism.filters
 
 import javax.inject.Inject
 import play.api.http.DefaultHttpFilters

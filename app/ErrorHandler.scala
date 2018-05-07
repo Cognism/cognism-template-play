@@ -1,11 +1,10 @@
+import com.cognism.common.utils.ApplicationException
 import play.api.http.HttpErrorHandler
 import play.api.mvc._
 import play.api.mvc.Results._
 
 import scala.concurrent._
 import javax.inject.Singleton
-
-import utils.ApplicationException;
 
 @Singleton
 class ErrorHandler extends HttpErrorHandler {

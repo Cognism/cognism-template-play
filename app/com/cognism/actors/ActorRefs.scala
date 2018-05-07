@@ -1,4 +1,4 @@
-package actors
+package com.cognism.actors
 
 object ActorRefs{
 	
