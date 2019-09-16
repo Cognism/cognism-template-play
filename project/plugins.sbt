@@ -1,11 +1,12 @@
 logLevel := Level.Warn
 
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.13")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.19")
 
 // iHeart Swagger Plugin
 addSbtPlugin("com.iheart" % "sbt-play-swagger" % "0.7.4")
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.3.4")
+addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.3.9")
 
-//https://github.com/mefellows/sbt-dotenv
+addSbtPlugin("com.frugalmechanic" % "fm-sbt-s3-resolver" % "0.16.0")
+
 addSbtPlugin("au.com.onegeek" %% "sbt-dotenv" % "1.2.88")
