@@ -1,6 +1,6 @@
 logLevel := Level.Warn
 
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.19")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.7.3")
 
 // iHeart Swagger Plugin
 addSbtPlugin("com.iheart" % "sbt-play-swagger" % "0.7.4")
