@@ -21,9 +21,9 @@ object Common {
 
   object Dependencies{
     
-    val papertrail = "com.papertrailapp" % "logback-syslog4j" % "1.0.0"    
-    val janino = "org.codehaus.janino" % "janino" % "2.7.8"
-    val json = "com.typesafe.play" %% "play-json" % "2.6.7"
+    val papertrail = "com.papertrailapp" % "logback-syslog4j" % "1.0.0"
+    val janino = "org.codehaus.janino" % "janino" % "3.0.11"
+    val json = "com.typesafe.play" %% "play-json" % "2.7.3"
 
     val commonDeps = Seq(ehcache, ws)
 
