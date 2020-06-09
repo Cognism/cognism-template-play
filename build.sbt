@@ -1,6 +1,6 @@
 name := "cognism-template-play"
 
-version := "3.0.0"
+version := "4.0.0"
 
 lazy val common = (project in file("modules/common"))
   .enablePlugins(PlayScala)

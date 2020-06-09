@@ -1,6 +1,13 @@
 <configuration>
 
-    <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
+    <variable name="LOGDNA_ENABLED" value="${LOGDNA_ENABLED:-false}"/>
+    <variable name="LOGDNA_LOG_LEVEL" value="${LOGDNA_LOG_LEVEL:-DEBUG}"/>
+    <variable name="LOGDNA_INGEST_KEY" value="${LOGDNA_INGEST_KEY:-dc555855627931ee51e40743d99d7fec}"/>
+    <variable name="LOGDNA_INGEST_URL" value="${LOGDNA_INGEST_URL:-https://logs.logdna.com/logs/ingest}"/>
+    <variable name="LOGDNA_APP_NAME" value="${LOGDNA_APP_NAME:-cognism-template-play}"/>
+    <variable name="LOGDNA_TAGS" value="${LOGDNA_TAGS:-backend,api,template-play,staging}"/>
+
+    <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel"/>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>./logs/application.log</file>
@@ -21,23 +28,24 @@
         </encoder>
     </appender>
 
-    <appender name="PAPERTRAIL" class="com.papertrailapp.logback.Syslog4jAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%d{MMM dd HH:mm:ss} ${PAPERTRAIL_IDENT} ${HOSTNAME}: %-5level %logger{35}: %m%n%xEx</pattern>
-        </layout>
+    <appender name="LogDnaHttp" class="net.zileo.logback.logdna.LogDnaAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} %X{sourceThread} - %msg%n</pattern>
+        </encoder>
+        <appName>${LOGDNA_APP_NAME}</appName>
+        <ingestKey>${LOGDNA_INGEST_KEY}</ingestKey>
+        <ingestUrl>${LOGDNA_INGEST_URL}</ingestUrl>
+        <mdcFields></mdcFields>
+        <mdcTypes></mdcTypes>
+        <tags>${LOGDNA_TAGS}</tags>
+    </appender>
 
-        <syslogConfig class="org.productivity.java.syslog4j.impl.net.tcp.ssl.SSLTCPNetSyslogConfig">
-            <!-- remote system to log to -->
-            <host>${PAPERTRAIL_HOST}</host>
-            <!-- remote port to log to -->
-            <port>${PAPERTRAIL_PORT}</port>
-            <!-- program name to log as -->
-            <!--ident>${PAPERTRAIL_IDENT}</ident-->
-            <!-- max log message length in bytes -->
-            <maxMessageLength>128000</maxMessageLength>
-            <sendLocalTimestamp>false</sendLocalTimestamp>
-            <sendLocalName>false</sendLocalName>
-        </syslogConfig>
+    <appender name="LogDna" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="LogDnaHttp"/>
+        <queueSize>500</queueSize>
+        <discardingThreshold>50</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <neverBlock>true</neverBlock>
     </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -47,25 +55,34 @@
     </appender>
 
     <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </appender>
 
     <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="FILE" />
+        <appender-ref ref="FILE"/>
     </appender>
 
-    <logger name="play" level="INFO" />
-    <logger name="application" level="INFO" />
+    <logger name="play" level="INFO"/>
+    <logger name="application" level="INFO"/>
 
     <root level="INFO">
-        <appender-ref ref="ASYNCSTDOUT" />
-        <appender-ref ref="ASYNCFILE" />
+        <appender-ref ref="ASYNCSTDOUT"/>
+        <appender-ref ref="ASYNCFILE"/>
     </root>
 
-    <if condition='property("PAPERTRAIL_ENABLED").contains("true")'>
+    <if condition='property("LOGDNA_ENABLED").contains("false")'>
         <then>
-            <root level="INFO">
-                <appender-ref ref="PAPERTRAIL" />
+            <root level="${LOGDNA_LOG_LEVEL}">
+                <appender-ref ref="ASYNCSTDOUT"/>
+                <appender-ref ref="ASYNCFILE"/>
+            </root>
+        </then>
+    </if>
+
+    <if condition='property("LOGDNA_ENABLED").contains("true")'>
+        <then>
+            <root level="${LOGDNA_LOG_LEVEL}">
+                <appender-ref ref="LogDna"/>
             </root>
         </then>
     </if>

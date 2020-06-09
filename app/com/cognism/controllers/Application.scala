@@ -16,8 +16,6 @@ class Application @Inject() extends InjectedController with Secured {
     Ok(payload)
   }
 
-  def echo(msg:String) = ApiAction{ request =>
-    Ok(msg)
-  }
+  def echo(msg: String) = ApiAction { request => Ok(msg) }
 
 }
