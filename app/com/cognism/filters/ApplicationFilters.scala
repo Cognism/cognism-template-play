@@ -6,5 +6,5 @@ import play.filters.cors.CORSFilter
 import play.filters.gzip.GzipFilter
 import play.filters.headers.SecurityHeadersFilter
 
-
-class ApplicationFilters @Inject()(gzip:GzipFilter, log:LoggingFilter, cors:CORSFilter, security:SecurityHeadersFilter) extends DefaultHttpFilters(gzip, log, cors, security)
+class ApplicationFilters @Inject() (gzip: GzipFilter, log: LoggingFilter, cors: CORSFilter, security: SecurityHeadersFilter)
+    extends DefaultHttpFilters(gzip, log, cors, security)
