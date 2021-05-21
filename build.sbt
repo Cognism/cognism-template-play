@@ -13,13 +13,13 @@ lazy val root = (project in file("."))
   .dependsOn(common)
   .settings(Common.settings: _*)
   .settings(libraryDependencies ++= Common.Dependencies.rootDeps)
-  .settings(aggregate in Docker := false)
+  .settings(Docker / aggregate := false)
 
 swaggerDomainNameSpaces := Seq("com.cognism.models")
 
 routesGenerator := InjectedRoutesGenerator
 
 // Docker settings
-maintainer in Docker := "ops@cognism.com"
+Docker / maintainer := "ops@cognism.com"
 
-packageName in Docker := "cognism/todo"
+Docker / packageName := "cognism/todo"

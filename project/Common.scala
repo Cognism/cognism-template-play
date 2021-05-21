@@ -5,7 +5,7 @@ import sbt._
 object Common {
   val settings: Seq[Setting[_]] = Seq(
     organization := "com.cognism",
-    scalaVersion := "2.13.2",
+    scalaVersion := "2.13.5",
     scalacOptions ++= Seq(
           //Emit warning for usages of deprecated APIs
           "-deprecation",
@@ -21,13 +21,14 @@ object Common {
 
   object Dependencies {
 
-    val janino = "org.codehaus.janino" % "janino" % "3.1.2"
-    val json = "com.typesafe.play" %% "play-json" % "2.9.0"
-    val logdnaZileo = "net.zileo" % "logback-logdna" % "1.0.1"
+    val janino = "org.codehaus.janino" % "janino" % "3.1.4"
+    val json = "com.typesafe.play" %% "play-json" % "2.9.2"
+    val logdnaZileo = "net.zileo" % "logback-logdna" % "1.1.2"
+    val jackson = "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.12.3"
 
     val commonDeps = Seq(ehcache, ws)
 
-    val rootDeps = Seq(guice, ehcache, filters, ws, specs2 % Test, janino, json, logdnaZileo)
+    val rootDeps = Seq(guice, ehcache, filters, ws, specs2 % Test, janino, json, logdnaZileo, jackson)
 
   }
 }
